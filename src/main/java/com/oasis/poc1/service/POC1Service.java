@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import com.oasis.poc1.entity.PetroleumWell;
 import com.oasis.poc1.entity.Token;
 
 @Service
@@ -23,6 +25,8 @@ public class POC1Service {
 	RestTemplate restTemplate;
 	
 	Logger logger = LoggerFactory.getLogger(POC1Service.class);
+	
+	String tokenString="";
 	
 	
 	//Testing REST API using Rest Template 
@@ -65,7 +69,7 @@ public class POC1Service {
 		
 		ResponseEntity<Token> response = restTemplate.exchange(tokenUrl,HttpMethod.POST,httpEntity,Token.class);
 		Token token = response.getBody();
-										
+		tokenString = token.getToken();		
 		if(Objects.nonNull(response)) {
 			logger.info("..Token received successfully from ArcGIS Enterprise Generate Token API ..");
 			logger.info("Response:" + token);
@@ -76,6 +80,38 @@ public class POC1Service {
 		}
 		logger.info("..Testing ArcGIS Enterprise Generate Token API "+tokenUrl+ " ends..");
 		return responseEntity;
+	}
+	
+	//Testing ArcGIS Petroleum Well API using Rest Template 
+	public ResponseEntity<PetroleumWell> testPetroleumWellAPI(){
+		
+		logger.info("..Testing ArcGIS Enterprise Petroleum Well API begins..");
+		/*
+		//Checking if Token is empty 
+		if(Objects.isNull(tokenString)||tokenString.isEmpty()) {
+			logger.info("..TOKEN is empty...Fetching token from generateToken API");
+			testGenerateTokenAPI();			
+		}
+		*/	
+		String PETROLEUM_WELL_subset="https://services5.arcgis.com/D9dI3nY76wGaru7T/arcgis/rest/services/PETROLEUM_WELL_subset/FeatureServer";
+		String tokenUrl=PETROLEUM_WELL_subset+"/query?token="+tokenString+"&f=json&layerDefs=0:1=1";
+			                			
+		logger.info("..Testing ArcGIS Enterprise Petroleum Well API: " +tokenUrl+ " begins..");
+			
+		ResponseEntity<PetroleumWell> responseEntity =null;
+		
+		ResponseEntity<PetroleumWell> response = restTemplate.exchange(tokenUrl,HttpMethod.POST,null,PetroleumWell.class);
+		if(Objects.nonNull(response)) {
+			logger.info("..Response received successfully from ArcGIS Petroleum Well API ..");
+			PetroleumWell petroleumWell = response.getBody();
+			logger.info("Petroleum Well API Response:" + petroleumWell);
+			responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(petroleumWell);
+		}else {
+			logger.error("..ArcGIS Enterprise Petroleum Well API Call Failed : Empty Response..");
+			responseEntity=ResponseEntity.noContent().build();
+		}
+		logger.info("..Testing ArcGIS Enterprise Petroleum Well API ends..");			
+		return responseEntity;			
 	}
 	
 }

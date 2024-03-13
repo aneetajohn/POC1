@@ -1,11 +1,9 @@
 package com.oasis.poc1.entity;
 
-import java.util.Date;
-
 public class Token {
 
 	private String token;
-	private Date expires;
+	private Long expires;
 	private boolean ssl;
 	
 	public String getToken() {
@@ -14,10 +12,10 @@ public class Token {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	public Date getExpires() {
+	public Long getExpires() {
 		return expires;
 	}
-	public void setExpires(Date expires) {
+	public void setExpires(Long expires) {
 		this.expires = expires;
 	}
 	public boolean isSsl() {

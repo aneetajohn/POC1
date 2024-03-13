@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.oasis.poc1.entity.PetroleumWell;
 import com.oasis.poc1.entity.Token;
 import com.oasis.poc1.service.POC1Service;
 
@@ -33,4 +34,9 @@ public class POC1Controller {
 		return responseEntity;				
 	}
 
+	@GetMapping("/testWellAPI")
+	public ResponseEntity<PetroleumWell> testPetroleumWellAPI(){	
+		ResponseEntity<PetroleumWell> responseEntity=service.testPetroleumWellAPI();		
+		return responseEntity;				
+	}
 }
