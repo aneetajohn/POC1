@@ -1,8 +1,5 @@
 package com.oasis.poc1.service;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 import org.slf4j.Logger;
@@ -14,11 +11,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
 import com.oasis.poc1.entity.Token;
-
-
 
 @Service
 public class POC1Service {
@@ -46,44 +42,36 @@ public class POC1Service {
 		logger.info("..Testing ArcGIS Enterprise Rest API "+url+ " ends..");
 		return responseEntity;
 	}
-
-
-    //Testing POST API using Rest Template 
+	
+	//Testing ArcGIS Generate Token  API using Rest Template 
 	public ResponseEntity<Token> testGenerateTokenAPI(){			
-		String tokenUrl="http://lrcgo.maps.arcgis.com/sharing/generateToken";
 		
+		String tokenUrl="https://lrcgo.maps.arcgis.com/sharing/generateToken";
+		                			
 		logger.info("..Testing ArcGIS Enterprise Generate Token API: " +tokenUrl+ " begins..");
 		
 		ResponseEntity<Token> responseEntity =null;			
 					
 		HttpHeaders header = new HttpHeaders();
 		header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);	
-		header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		//key1=value1&key2=value2.
-	//	header.setBasicAuth("username=dev_automation&password=OASISpoc12");
 		
-		Map<String,String> requestbody = new HashMap<>();
-		requestbody.put("username", "dev_automation");
-		requestbody.put("password", "OASISpoc12");
-		requestbody.put("f", "json");
-		requestbody.put("referer", "https://www.arcgis.com");
+		MultiValueMap<String,String> requestbody = new LinkedMultiValueMap<String,String>();
+		requestbody.add("username", "dev_automation");
+		requestbody.add("password", "OASISpoc13");
+		requestbody.add("f", "json");
+		requestbody.add("referer", "https://www.arcgis.com");
 		
-		HttpEntity<Map<String,String>> httpEntity = new HttpEntity<Map<String,String>>(requestbody,header);
-		responseEntity = restTemplate.exchange(tokenUrl,HttpMethod.POST,httpEntity,Token.class);
+		HttpEntity<MultiValueMap<String,String>> httpEntity = new HttpEntity<>(requestbody,header);
 		
-		Token response = responseEntity.getBody();
-		//Object response = restTemplate.postForObject(tokenUrl, httpEntity, Object.class);
-		
-		//	ResponseEntity<Token> response = restTemplate.postForEntity(tokenUrl, httpEntity, Token.class);
-			
-		//String response = restTemplate.postForObject(tokenUrl, httpEntity, String.class);
-			
+		ResponseEntity<Token> response = restTemplate.exchange(tokenUrl,HttpMethod.POST,httpEntity,Token.class);
+		Token token = response.getBody();
+										
 		if(Objects.nonNull(response)) {
 			logger.info("..Token received successfully from ArcGIS Enterprise Generate Token API ..");
-			logger.info("Response:" + response);
-			responseEntity= ResponseEntity.status(200).contentType(MediaType.ALL).body(response);
+			logger.info("Response:" + token);
+			responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(token);
 		}else {
-			logger.info("..ArcGIS Enterprise Generate Token API Call Failed : Empty Token..");
+			logger.error("..ArcGIS Enterprise Generate Token API Call Failed : Empty Token..");
 			responseEntity=ResponseEntity.noContent().build();
 		}
 		logger.info("..Testing ArcGIS Enterprise Generate Token API "+tokenUrl+ " ends..");
