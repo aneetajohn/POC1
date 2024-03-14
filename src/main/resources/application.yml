@@ -1,2 +1,5 @@
 server:
   port: 9050
+  
+PETROLEUM_WELL_SUBSET: https://services5.arcgis.com/D9dI3nY76wGaru7T/arcgis/rest/services/PETROLEUM_WELL_subset/FeatureServer
+TILE_DRAINAGE_AREA_SUBSET: https://services5.arcgis.com/D9dI3nY76wGaru7T/arcgis/rest/services/TILE_DRAINAGE_AREA_subset/FeatureServer

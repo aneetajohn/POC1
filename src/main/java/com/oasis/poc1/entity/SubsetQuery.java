@@ -2,7 +2,7 @@ package com.oasis.poc1.entity;
 
 import java.util.List;
 
-public class PetroleumWell {
+public class SubsetQuery {
 
 	private List<Layers> layers;
 
