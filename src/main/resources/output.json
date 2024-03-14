@@ -1,0 +1,67 @@
+[
+    {
+        "label": "First Name",
+        "type": "varchar",
+        "key": "fname",
+        "value": "John",
+        "validation": {
+            "required": true,
+            "minLength": 2
+        }
+    },
+    {
+        "label": "Last Name",
+        "type": "varchar",
+        "key": "lname",
+        "value": "Doss",
+        "validation": {
+            "required": true,
+            "minLength": 2
+        }
+    },
+    {
+        "label": "Email",
+        "type": "varchar",
+        "key": "email",
+        "value": "John.Doss@abc.com",
+        "validation": {
+            "required": true
+        }
+    },
+    {
+        "label": "Weight",
+        "type": "double",
+        "key": "weight",
+        "value": "35",
+        "validation": {
+            "required": false
+        }
+    },
+    {
+        "label": "Height",
+        "type": "double",
+        "key": "height",
+        "value": "120",
+        "validation": {
+            "required": true
+        }
+    },
+    {
+        "label": "Gender",
+        "type": "varchar",
+        "key": "gender",
+        "value": "F",
+        "validation": {
+            "required": true
+        }
+    },
+    {
+        "label": "Date",
+        "type": "date",
+        "key": "date",
+        "value": "2024-03-04",
+        "validation": {
+            "required": true
+        }
+    }
+]
