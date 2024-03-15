@@ -24,15 +24,15 @@ public class CoreWebArcGisService {
 	
 	Logger logger = LoggerFactory.getLogger(CoreWebArcGisService.class);
 	
-	public ResponseEntity<OutputJson[]> testCoreWebArcGisCommunication(){
+	public ResponseEntity<OutputJson> testCoreWebArcGisCommunication(){
 		logger.info("Testing Core Web ArcGis Communication begins");
-		ResponseEntity<OutputJson[]> responseEntity=null;		
+		ResponseEntity<OutputJson> responseEntity=null;		
 		try {
 			Resource resource = resourceLoader.getResource("classpath:output.json");
 			String fileContent = new String(resource.getInputStream().readAllBytes());
 			if(Objects.nonNull(fileContent)&&!fileContent.isEmpty()) {
 				ObjectMapper objectMapper = new ObjectMapper();
-				OutputJson[] response = objectMapper.readValue(fileContent, OutputJson[].class);
+				OutputJson response = objectMapper.readValue(fileContent, OutputJson.class);
 				responseEntity = ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(response);
 			}else {
 				responseEntity = ResponseEntity.noContent().build();
