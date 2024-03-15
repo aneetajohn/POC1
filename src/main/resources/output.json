@@ -1,76 +1,58 @@
-{
-    "data": [
-        {
-            "label": "First Name",
-            "controlType": "varchar",
-            "attribute": "fname",
-            "value": "John",
-            "tooltip": "Dynamic Form First Name",
-            "validation": {
-                "required": true,
-                "minLength": 2
-            }
-        },
-        {
-            "label": "Last Name",
-            "controlType": "varchar",
-            "attribute": "lname",
-            "value": "Doss",
-            "tooltip": "Dynamic Form Last Name",
-            "validation": {
-                "required": true,
-                "minLength": 2
-            }
-        },
-        {
-            "label": "Email",
-            "controlType": "varchar",
-            "attribute": "email",
-            "value": "John.Doss@abc.com",
-            "tooltip": "Dynamic Form Email",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "label": "Weight",
-            "controlType": "double",
-            "attribute": "weight",
-            "value": "35",
-            "tooltip": "Dynamic Form Weight",
-            "validation": {
-                "required": false
-            }
-        },
-        {
-            "label": "Height",
-            "controlType": "double",
-            "attribute": "height",
-            "value": "120",
-            "tooltip": "Dynamic Form Height",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "label": "Gender",
-            "controlType": "varchar",
-            "attribute": "gender",
-            "tooltip": "Dynamic Form Gender",
-            "value": "F",
-            "validation": {
-                "required": true
-            }
-        },
-        {
-            "label": "Date",
-            "controlType": "date",
-            "attribute": "date",
-            "tooltip": "Dynamic Form Date",
-            "value": "2024-03-04",
-            "validation": {
-                "required": true
-            }
-        }
-    ]
-}
+[
+    {
+        "entityName": "site",
+        "label": "First Name",
+        "controlType": "varchar",
+        "attribute": "fname",
+        "value": "John",
+        "timestamp": "2024-03-15T13:39:50.899Z"
+    },
+    {
+        "entityName": "site",
+        "label": "Last Name",
+        "controlType": "varchar",
+        "attribute": "lname",
+        "value": "Doss",
+        "timestamp": "2024-03-15T13:39:50.899Z"
+    },
+    {
+        "entityName": "site",
+        "label": "Email",
+        "controlType": "varchar",
+        "attribute": "email",
+        "value": "John.Doss@abc.com",
+        "timestamp": "2024-03-15T13:39:50.899Z"
+    },
+    {
+        "entityName": "site",
+        "label": "Weight",
+        "controlType": "double",
+        "attribute": "weight",
+        "value": "35",
+        "timestamp": "2024-03-15T13:39:50.899Z"
+    },
+    {
+        "entityName": "site",
+        "label": "Height",
+        "controlType": "double",
+        "attribute": "height",
+        "value": "120",
+        "timestamp": "2024-03-15T13:39:50.899Z"
+    },
+    {
+        "entityName": "site",
+        "label": "Gender",
+        "controlType": "varchar",
+        "attribute": "gender",
+        "value": "F",
+        "timestamp": "2024-03-15T13:39:50.899Z"
+    },
+    {
+        "entityName": "site",
+        "label": "Date",
+        "controlType": "date",
+        "attribute": "date",
+        "value": "2024-03-04",
+        "timestamp": "2024-03-15T13:39:50.899Z"
+    }
+]
