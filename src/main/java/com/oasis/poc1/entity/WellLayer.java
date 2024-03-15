@@ -1,10 +1,12 @@
 package com.oasis.poc1.entity;
 
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-public class Layers {
+public class WellLayer {
 	
+
 	private Integer id;
 	private String objectIdFieldName;
 	private String globalIdFieldName;
@@ -13,8 +15,7 @@ public class Layers {
 	private GeometryProperties geometryProperties;
 	private SpatialReference spatialReference;
 	private List<Fields> fields;
-	private List<Features> features;
-	
+	private List<WellFeatures> features;
 	public Integer getId() {
 		return id;
 	}
@@ -39,7 +40,6 @@ public class Layers {
 	public void setGeometryType(String geometryType) {
 		this.geometryType = geometryType;
 	}
-	
 	public GeometryProperties getGeometryProperties() {
 		return geometryProperties;
 	}
@@ -58,21 +58,19 @@ public class Layers {
 	public void setFields(List<Fields> fields) {
 		this.fields = fields;
 	}
-	public List<Features> getFeatures() {
+	public List<WellFeatures> getFeatures() {
 		return features;
 	}
-	public void setFeatures(List<Features> features) {
+	public void setFeatures(List<WellFeatures> features) {
 		this.features = features;
 	}
 	
 	@Override
 	public String toString() {
-		return "Layers [id=" + id + ", objectIdFieldName=" + objectIdFieldName + ", globalIdFieldName="
+		return "WellLayer [id=" + id + ", objectIdFieldName=" + objectIdFieldName + ", globalIdFieldName="
 				+ globalIdFieldName + ", geometryType=" + geometryType + ", geometryProperties=" + geometryProperties
 				+ ", spatialReference=" + spatialReference + ", fields=" + fields + ", features=" + features + "]";
 	}
-	
-	
 	
 	
 

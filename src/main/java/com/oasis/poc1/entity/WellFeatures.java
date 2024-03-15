@@ -1,13 +1,14 @@
 package com.oasis.poc1.entity;
 
-public class Features {
+public class WellFeatures {
 	
-	private Attributes attributes;
+	private WellAttributes attributes;
 	private Geometry geometry;
-	public Attributes getAttributes() {
+	
+	public WellAttributes getAttributes() {
 		return attributes;
 	}
-	public void setAttributes(Attributes attributes) {
+	public void setAttributes(WellAttributes attributes) {
 		this.attributes = attributes;
 	}
 	public Geometry getGeometry() {
@@ -16,16 +17,12 @@ public class Features {
 	public void setGeometry(Geometry geometry) {
 		this.geometry = geometry;
 	}
+	
 	@Override
 	public String toString() {
-		return "Features [attributes=" + attributes + ", geometry=" + geometry + "]";
+		return "WellFeatures [attributes=" + attributes + ", geometry=" + geometry + "]";
 	}
 	
 	
-	
-	
-	
-	
-	
-	
+
 }

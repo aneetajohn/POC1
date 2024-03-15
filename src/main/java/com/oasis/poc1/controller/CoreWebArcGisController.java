@@ -19,5 +19,5 @@ public class CoreWebArcGisController {
 		ResponseEntity<OutputJson[]> responseEntity=service.testCoreWebArcGisCommunication();
 		return responseEntity;	
 	}
-
+	
 }

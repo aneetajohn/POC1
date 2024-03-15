@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.oasis.poc1.entity.SubsetQuery;
-import com.oasis.poc1.entity.Token;
 import com.oasis.poc1.service.Poc1Service;
 
 
@@ -47,8 +43,8 @@ public class Poc1Controller {
 	}
 	
 	@GetMapping("/testTileQuery")
-	public ResponseEntity<SubsetQuery> testTileDrainageAreaApi(){	
-		ResponseEntity<SubsetQuery> responseEntity=service.testTileDrainageAreaSubsetQuery();		
+	public ResponseEntity<?> testTileDrainageAreaApi(){	
+		ResponseEntity<?> responseEntity=service.testTileDrainageAreaSubsetQuery();		
 		return responseEntity;				
 	}
 }

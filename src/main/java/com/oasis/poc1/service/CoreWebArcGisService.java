@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oasis.poc1.entity.OutputJson;
 
-
 @Service
 public class CoreWebArcGisService {
 	
@@ -43,7 +42,4 @@ public class CoreWebArcGisService {
 		logger.info("Testing Core Web ArcGis Communication ends");
 		return responseEntity;	
 	}
-	
-	
-
 }

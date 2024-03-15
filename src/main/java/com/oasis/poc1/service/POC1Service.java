@@ -21,8 +21,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oasis.poc1.entity.ErrorResponse;
-import com.oasis.poc1.entity.SubsetQuery;
+import com.oasis.poc1.entity.TileSubsetQuery;
 import com.oasis.poc1.entity.Token;
+import com.oasis.poc1.entity.WellSubsetQuery;
 
 @Service
 @PropertySource(value="application.yml")
@@ -116,26 +117,27 @@ public class Poc1Service {
 		
 		logger.info("..Testing ArcGIS Enterprise Petroleum Well API begins..");
 	
-		/*
-		//Checking if Token is empty 
-		if(Objects.isNull(tokenString)||tokenString.isEmpty()) {
-			logger.info("..TOKEN is empty...Fetching token from generateToken API");
-			testGenerateTokenAPI();			
-		}
-		*/	
 		ResponseEntity<?> responseEntity =null;
-		String petroleumWellUrl=petroleumWellSubset+"/query?token="+tokenString+"&f=json&layerDefs=0:1=1";
+	
+		String petroleumWellUrl=petroleumWellSubset+"/query?token="+tokenString;
+		
+		HttpHeaders header = new HttpHeaders();
+		
+		MultiValueMap<String,String> requestbody = new LinkedMultiValueMap<String,String>();		
+		requestbody.add("f", "json");
+		requestbody.add("layerDefs", "0:1=1");
+		
+		HttpEntity<MultiValueMap<String,String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(requestbody,header);
 			                			
-		logger.info("..Testing ArcGIS Enterprise Petroleum Well API: " +petroleumWellUrl+ " begins..");
+		logger.info("Executing ArcGIS Enterprise Petroleum Well API: " +petroleumWellUrl);
 					
 		try {		
-			//ResponseEntity<SubsetQuery> response = restTemplate.exchange(petroleumWellUrl,HttpMethod.POST,null,SubsetQuery.class);
-			ResponseEntity<String> response = restTemplate.exchange(petroleumWellUrl,HttpMethod.POST,null,String.class);
+			ResponseEntity<String> response = restTemplate.exchange(petroleumWellUrl,HttpMethod.POST,httpEntity,String.class);
 			if(Objects.nonNull(response)) {
 				//Checking if response has error code
 				if(!response.getBody().contains("error")) {
-					SubsetQuery petroleumWell = objectMapper.readValue(response.getBody(), SubsetQuery.class);
-					logger.info("..Response received successfully from ArcGIS Petroleum Well API .." + petroleumWell);
+					WellSubsetQuery petroleumWell = objectMapper.readValue(response.getBody(), WellSubsetQuery.class);
+					logger.info("Success Response received from ArcGIS Petroleum Well API .." + petroleumWell);
 					responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(petroleumWell);
 				}else {
 					ErrorResponse errorResponse = objectMapper.readValue(response.getBody(), ErrorResponse.class) ;	
@@ -148,7 +150,7 @@ public class Poc1Service {
 				responseEntity=ResponseEntity.noContent().build();
 			}
 		}catch(Exception e) {
-			logger.error("Error in testTokenApi : " + e.getMessage());
+			logger.error("Error in testing Petroleum Well Subset Query : " + e.getMessage());
 			e.printStackTrace();
 		}
 		logger.info("..Testing ArcGIS Enterprise Petroleum Well API ends..");			
@@ -156,35 +158,54 @@ public class Poc1Service {
 	}
 	
 	//Testing ArcGIS Tile Drainage Area Subset Query using Rest Template 
-		public ResponseEntity<SubsetQuery> testTileDrainageAreaSubsetQuery(){
+	public ResponseEntity<?> testTileDrainageAreaSubsetQuery(){
 			
-			logger.info("..Testing ArcGIS Enterprise Tile Drainage Area Subset API begins..");
-			/*
-			//Checking if Token is empty 
-			if(Objects.isNull(tokenString)||tokenString.isEmpty()) {
-				logger.info("..TOKEN is empty...Fetching token from generateToken API");
-				testGenerateTokenAPI();			
-			}
-			*/	
-			String PETROLEUM_WELL_subset="https://services5.arcgis.com/D9dI3nY76wGaru7T/arcgis/rest/services/PETROLEUM_WELL_subset/FeatureServer";
-			String tokenUrl=PETROLEUM_WELL_subset+"/query?token="+tokenString+"&f=json&layerDefs=0:1=1";
-				                			
-			logger.info("..Testing ArcGIS Enterprise Tile Drainage Area Subset API: " +tokenUrl+ " begins..");
+		logger.info("..Testing ArcGIS Enterprise Tile Drainage Area Subset API begins..");			
+		ResponseEntity<?> responseEntity =null;
+		logger.info("Token String: " +  tokenString);
+		/*
+		if(tokenString.isEmpty()) {
+			logger.info("Token String is Empty. Generating Token");
+			testGenerateTokenApi();
+			logger.info("Token String: " +  tokenString);
+		}*/
+		
+		String tileUrl=tileDrainageAreaSubset+"/query?token="+tokenString;   
 				
-			ResponseEntity<SubsetQuery> responseEntity =null;
-			
-			ResponseEntity<SubsetQuery> response = restTemplate.exchange(tokenUrl,HttpMethod.POST,null,SubsetQuery.class);
-			if(Objects.nonNull(response)) {
-				logger.info("..Response received successfully from ArcGIS Petroleum Well API ..");
-				SubsetQuery petroleumWell = response.getBody();
-				logger.info("Petroleum Well API Response:" + petroleumWell);
-				responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(petroleumWell);
+		HttpHeaders header = new HttpHeaders();
+	
+		MultiValueMap<String,String> requestbody = new LinkedMultiValueMap<String,String>();		
+		requestbody.add("f", "json");
+		requestbody.add("layerDefs", "{\"6\": \"YEAR_OF_INSTALLATION = 2021\"}");
+		
+		HttpEntity<MultiValueMap<String,String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(requestbody,header);
+		
+		logger.info("Executing ArcGIS Enterprise Tile Drainage Area Subset API: " +tileUrl);
+		
+		try {  			
+			ResponseEntity<String> response = restTemplate.exchange(tileUrl,HttpMethod.POST,httpEntity,String.class);		
+			if(Objects.nonNull(response)){
+				//Checking if response has error code
+				if(!response.getBody().contains("error")) {
+					TileSubsetQuery tileDrainageArea = objectMapper.readValue(response.getBody(), TileSubsetQuery.class);
+					logger.info("Success Response received from ArcGIS Tile Drainage Area Subset API .." + tileDrainageArea);
+					responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(tileDrainageArea);
+				}else {
+					ErrorResponse errorResponse = objectMapper.readValue(response.getBody(), ErrorResponse.class) ;	
+					logger.info("Error Response received from ArcGIS Tile Drainage Area Subset API:" + errorResponse);
+					responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(errorResponse);
+				}				
 			}else {
-				logger.error("..ArcGIS Enterprise Tile Drainage Area Subset API Call Failed : Empty Response..");
+				logger.error("..ArcGIS Enterprise Tile Drainage Area Subset Call Failed : Empty Response..");
+				logger.info("Empty Response:" + response.getBody());
 				responseEntity=ResponseEntity.noContent().build();
 			}
-			logger.info("..Testing ArcGIS Enterprise Tile Drainage Area Subset API ends..");			
-			return responseEntity;			
+		}catch(Exception e) {
+			logger.error("Error in Tile Drainage Area Subset Query : " + e.getMessage());
+			e.printStackTrace();
 		}
+		logger.info("..Testing ArcGIS Enterprise Tile Drainage Area Subset API ends..");			
+		return responseEntity;			
+	}
 	
 }

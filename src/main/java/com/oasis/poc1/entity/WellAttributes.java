@@ -4,121 +4,85 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonFormat(with = JsonFormat.Feature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
-//@JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Attributes {
-	
+public class WellAttributes {
+
 	private Integer OBJECTID;
 	private Integer OGF_ID;
+	
 	//Well Attributes
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
 	private Integer WELL_ID;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String LICENCE_NUMBER;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String WELL_NAME;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String OPERATOR;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String WELL_TYPE;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String WELL_MODE;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private Double SURFACE_LATITUDE_83;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private Double SURFACE_LONGITUDE_83;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private Double BOTTOM_LATITUDE_83;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private Double BOTTOM_LONGITUDE_83;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String LOCATION_SOURCE;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private Double GROUND_ELEVATION;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private Double TOTAL_DEPTH;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private Double TRUE_VERTICAL_DEPTH;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String COUNTY;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String TOWNSHIP;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String LOT;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String CONCESSION;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String NORTH_SOUTH_BOUNDARY;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String NORTH_SOUTH_FLG;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String EAST_WEST_BOUNDARY;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String EAST_WEST_FLG;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String OFFSHORE_BLOCK;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String OFFSHORE_TRACT;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String VERTICAL_FLG;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String HORIZONTAL_FLG;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String DIRECTIONAL_FLG;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String DEEPENING_FLG;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String REENTRY_FLG;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private String LATERAL_FLG;	
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+
 	private Long SPUD_DATE;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private Long TOTAL_DEPTH_REACHED_DATE;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+
 	private Long PLUGGING_END_DATE;
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
+	
 	private String MAP_SYMBOL_CODE;
-	
-	//Tile Attributes
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private String TILE_SYSTEM_TYPE;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private String JOB_NUMBER;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private String NEW_TILE_SYSTEM_IND;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private Integer YEAR_OF_INSTALLATION;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private String TILE_CONTRACTOR_NAME;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private String TILE_CONTRACTOR_LICENCE_NUMBER;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private Integer AREA_TILED_ACRES;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private String AREA_TILED_HECTARES;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private String AREA_TILED_SOURCE;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private String TYPE_OTHER_DESCR;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private Integer TILE_LENGTH_FEET;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private Integer TILE_LENGTH_METRES;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private String GENERAL_COMMENTS;	
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private String REPORT_URL;
-	
 	private String LOCATION_ACCURACY;
 	private Long GEOMETRY_UPDATE_DATETIME;
 	private Long EFFECTIVE_DATETIME;
 	private Long SYSTEM_DATETIME;
 	private String SE_ANNO_CAD_DATA;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private Double Shape__Area;
-	@JsonInclude(JsonInclude.Include.NON_ABSENT)
-	private Double Shape__Length;
-	
 	public Integer getOBJECTID() {
 		return OBJECTID;
 	}
@@ -335,90 +299,6 @@ public class Attributes {
 	public void setMAP_SYMBOL_CODE(String mAP_SYMBOL_CODE) {
 		MAP_SYMBOL_CODE = mAP_SYMBOL_CODE;
 	}
-	public String getTILE_SYSTEM_TYPE() {
-		return TILE_SYSTEM_TYPE;
-	}
-	public void setTILE_SYSTEM_TYPE(String tILE_SYSTEM_TYPE) {
-		TILE_SYSTEM_TYPE = tILE_SYSTEM_TYPE;
-	}
-	public String getJOB_NUMBER() {
-		return JOB_NUMBER;
-	}
-	public void setJOB_NUMBER(String jOB_NUMBER) {
-		JOB_NUMBER = jOB_NUMBER;
-	}
-	public String getNEW_TILE_SYSTEM_IND() {
-		return NEW_TILE_SYSTEM_IND;
-	}
-	public void setNEW_TILE_SYSTEM_IND(String nEW_TILE_SYSTEM_IND) {
-		NEW_TILE_SYSTEM_IND = nEW_TILE_SYSTEM_IND;
-	}
-	public Integer getYEAR_OF_INSTALLATION() {
-		return YEAR_OF_INSTALLATION;
-	}
-	public void setYEAR_OF_INSTALLATION(Integer yEAR_OF_INSTALLATION) {
-		YEAR_OF_INSTALLATION = yEAR_OF_INSTALLATION;
-	}
-	public String getTILE_CONTRACTOR_NAME() {
-		return TILE_CONTRACTOR_NAME;
-	}
-	public void setTILE_CONTRACTOR_NAME(String tILE_CONTRACTOR_NAME) {
-		TILE_CONTRACTOR_NAME = tILE_CONTRACTOR_NAME;
-	}
-	public String getTILE_CONTRACTOR_LICENCE_NUMBER() {
-		return TILE_CONTRACTOR_LICENCE_NUMBER;
-	}
-	public void setTILE_CONTRACTOR_LICENCE_NUMBER(String tILE_CONTRACTOR_LICENCE_NUMBER) {
-		TILE_CONTRACTOR_LICENCE_NUMBER = tILE_CONTRACTOR_LICENCE_NUMBER;
-	}
-	public Integer getAREA_TILED_ACRES() {
-		return AREA_TILED_ACRES;
-	}
-	public void setAREA_TILED_ACRES(Integer aREA_TILED_ACRES) {
-		AREA_TILED_ACRES = aREA_TILED_ACRES;
-	}
-	public String getAREA_TILED_HECTARES() {
-		return AREA_TILED_HECTARES;
-	}
-	public void setAREA_TILED_HECTARES(String aREA_TILED_HECTARES) {
-		AREA_TILED_HECTARES = aREA_TILED_HECTARES;
-	}
-	public String getAREA_TILED_SOURCE() {
-		return AREA_TILED_SOURCE;
-	}
-	public void setAREA_TILED_SOURCE(String aREA_TILED_SOURCE) {
-		AREA_TILED_SOURCE = aREA_TILED_SOURCE;
-	}
-	public String getTYPE_OTHER_DESCR() {
-		return TYPE_OTHER_DESCR;
-	}
-	public void setTYPE_OTHER_DESCR(String tYPE_OTHER_DESCR) {
-		TYPE_OTHER_DESCR = tYPE_OTHER_DESCR;
-	}
-	public Integer getTILE_LENGTH_FEET() {
-		return TILE_LENGTH_FEET;
-	}
-	public void setTILE_LENGTH_FEET(Integer tILE_LENGTH_FEET) {
-		TILE_LENGTH_FEET = tILE_LENGTH_FEET;
-	}
-	public Integer getTILE_LENGTH_METRES() {
-		return TILE_LENGTH_METRES;
-	}
-	public void setTILE_LENGTH_METRES(Integer tILE_LENGTH_METRES) {
-		TILE_LENGTH_METRES = tILE_LENGTH_METRES;
-	}
-	public String getGENERAL_COMMENTS() {
-		return GENERAL_COMMENTS;
-	}
-	public void setGENERAL_COMMENTS(String gENERAL_COMMENTS) {
-		GENERAL_COMMENTS = gENERAL_COMMENTS;
-	}
-	public String getREPORT_URL() {
-		return REPORT_URL;
-	}
-	public void setREPORT_URL(String rEPORT_URL) {
-		REPORT_URL = rEPORT_URL;
-	}
 	public String getLOCATION_ACCURACY() {
 		return LOCATION_ACCURACY;
 	}
@@ -449,60 +329,30 @@ public class Attributes {
 	public void setSE_ANNO_CAD_DATA(String sE_ANNO_CAD_DATA) {
 		SE_ANNO_CAD_DATA = sE_ANNO_CAD_DATA;
 	}
-	public Double getShape__Area() {
-		return Shape__Area;
-	}
-	public void setShape__Area(Double shape__Area) {
-		Shape__Area = shape__Area;
-	}
-	public Double getShape__Length() {
-		return Shape__Length;
-	}
-	public void setShape__Length(Double shape__Length) {
-		Shape__Length = shape__Length;
-	}
 	
 	@Override
 	public String toString() {
-		return "Attributes [OBJECTID=" + OBJECTID + ", OGF_ID=" + OGF_ID + ", WELL_ID=" + WELL_ID + ", LICENCE_NUMBER="
-				+ LICENCE_NUMBER + ", WELL_NAME=" + WELL_NAME + ", OPERATOR=" + OPERATOR + ", WELL_TYPE=" + WELL_TYPE
-				+ ", WELL_MODE=" + WELL_MODE + ", SURFACE_LATITUDE_83=" + SURFACE_LATITUDE_83
-				+ ", SURFACE_LONGITUDE_83=" + SURFACE_LONGITUDE_83 + ", BOTTOM_LATITUDE_83=" + BOTTOM_LATITUDE_83
-				+ ", BOTTOM_LONGITUDE_83=" + BOTTOM_LONGITUDE_83 + ", LOCATION_SOURCE=" + LOCATION_SOURCE
-				+ ", GROUND_ELEVATION=" + GROUND_ELEVATION + ", TOTAL_DEPTH=" + TOTAL_DEPTH + ", TRUE_VERTICAL_DEPTH="
-				+ TRUE_VERTICAL_DEPTH + ", COUNTY=" + COUNTY + ", TOWNSHIP=" + TOWNSHIP + ", LOT=" + LOT
-				+ ", CONCESSION=" + CONCESSION + ", NORTH_SOUTH_BOUNDARY=" + NORTH_SOUTH_BOUNDARY + ", NORTH_SOUTH_FLG="
-				+ NORTH_SOUTH_FLG + ", EAST_WEST_BOUNDARY=" + EAST_WEST_BOUNDARY + ", EAST_WEST_FLG=" + EAST_WEST_FLG
-				+ ", OFFSHORE_BLOCK=" + OFFSHORE_BLOCK + ", OFFSHORE_TRACT=" + OFFSHORE_TRACT + ", VERTICAL_FLG="
-				+ VERTICAL_FLG + ", HORIZONTAL_FLG=" + HORIZONTAL_FLG + ", DIRECTIONAL_FLG=" + DIRECTIONAL_FLG
-				+ ", DEEPENING_FLG=" + DEEPENING_FLG + ", REENTRY_FLG=" + REENTRY_FLG + ", LATERAL_FLG=" + LATERAL_FLG
-				+ ", SPUD_DATE=" + SPUD_DATE + ", TOTAL_DEPTH_REACHED_DATE=" + TOTAL_DEPTH_REACHED_DATE
-				+ ", PLUGGING_END_DATE=" + PLUGGING_END_DATE + ", MAP_SYMBOL_CODE=" + MAP_SYMBOL_CODE
-				+ ", TILE_SYSTEM_TYPE=" + TILE_SYSTEM_TYPE + ", JOB_NUMBER=" + JOB_NUMBER + ", NEW_TILE_SYSTEM_IND="
-				+ NEW_TILE_SYSTEM_IND + ", YEAR_OF_INSTALLATION=" + YEAR_OF_INSTALLATION + ", TILE_CONTRACTOR_NAME="
-				+ TILE_CONTRACTOR_NAME + ", TILE_CONTRACTOR_LICENCE_NUMBER=" + TILE_CONTRACTOR_LICENCE_NUMBER
-				+ ", AREA_TILED_ACRES=" + AREA_TILED_ACRES + ", AREA_TILED_HECTARES=" + AREA_TILED_HECTARES
-				+ ", AREA_TILED_SOURCE=" + AREA_TILED_SOURCE + ", TYPE_OTHER_DESCR=" + TYPE_OTHER_DESCR
-				+ ", TILE_LENGTH_FEET=" + TILE_LENGTH_FEET + ", TILE_LENGTH_METRES=" + TILE_LENGTH_METRES
-				+ ", GENERAL_COMMENTS=" + GENERAL_COMMENTS + ", REPORT_URL=" + REPORT_URL + ", LOCATION_ACCURACY="
-				+ LOCATION_ACCURACY + ", GEOMETRY_UPDATE_DATETIME=" + GEOMETRY_UPDATE_DATETIME + ", EFFECTIVE_DATETIME="
+		return "WellAttributes [OBJECTID=" + OBJECTID + ", OGF_ID=" + OGF_ID + ", WELL_ID=" + WELL_ID
+				+ ", LICENCE_NUMBER=" + LICENCE_NUMBER + ", WELL_NAME=" + WELL_NAME + ", OPERATOR=" + OPERATOR
+				+ ", WELL_TYPE=" + WELL_TYPE + ", WELL_MODE=" + WELL_MODE + ", SURFACE_LATITUDE_83="
+				+ SURFACE_LATITUDE_83 + ", SURFACE_LONGITUDE_83=" + SURFACE_LONGITUDE_83 + ", BOTTOM_LATITUDE_83="
+				+ BOTTOM_LATITUDE_83 + ", BOTTOM_LONGITUDE_83=" + BOTTOM_LONGITUDE_83 + ", LOCATION_SOURCE="
+				+ LOCATION_SOURCE + ", GROUND_ELEVATION=" + GROUND_ELEVATION + ", TOTAL_DEPTH=" + TOTAL_DEPTH
+				+ ", TRUE_VERTICAL_DEPTH=" + TRUE_VERTICAL_DEPTH + ", COUNTY=" + COUNTY + ", TOWNSHIP=" + TOWNSHIP
+				+ ", LOT=" + LOT + ", CONCESSION=" + CONCESSION + ", NORTH_SOUTH_BOUNDARY=" + NORTH_SOUTH_BOUNDARY
+				+ ", NORTH_SOUTH_FLG=" + NORTH_SOUTH_FLG + ", EAST_WEST_BOUNDARY=" + EAST_WEST_BOUNDARY
+				+ ", EAST_WEST_FLG=" + EAST_WEST_FLG + ", OFFSHORE_BLOCK=" + OFFSHORE_BLOCK + ", OFFSHORE_TRACT="
+				+ OFFSHORE_TRACT + ", VERTICAL_FLG=" + VERTICAL_FLG + ", HORIZONTAL_FLG=" + HORIZONTAL_FLG
+				+ ", DIRECTIONAL_FLG=" + DIRECTIONAL_FLG + ", DEEPENING_FLG=" + DEEPENING_FLG + ", REENTRY_FLG="
+				+ REENTRY_FLG + ", LATERAL_FLG=" + LATERAL_FLG + ", SPUD_DATE=" + SPUD_DATE
+				+ ", TOTAL_DEPTH_REACHED_DATE=" + TOTAL_DEPTH_REACHED_DATE + ", PLUGGING_END_DATE=" + PLUGGING_END_DATE
+				+ ", MAP_SYMBOL_CODE=" + MAP_SYMBOL_CODE + ", LOCATION_ACCURACY=" + LOCATION_ACCURACY
+				+ ", GEOMETRY_UPDATE_DATETIME=" + GEOMETRY_UPDATE_DATETIME + ", EFFECTIVE_DATETIME="
 				+ EFFECTIVE_DATETIME + ", SYSTEM_DATETIME=" + SYSTEM_DATETIME + ", SE_ANNO_CAD_DATA=" + SE_ANNO_CAD_DATA
-				+ ", Shape__Area=" + Shape__Area + ", Shape__Length=" + Shape__Length + "]";
+				+ "]";
 	}
 	
-
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
