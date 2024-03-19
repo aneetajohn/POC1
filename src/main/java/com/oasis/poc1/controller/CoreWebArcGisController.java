@@ -14,7 +14,7 @@ public class CoreWebArcGisController {
 	@Autowired
 	CoreWebArcGisService service;
 	
-	@GetMapping("/testCommunication")
+	@GetMapping("/getCoreWebArcGisCommunication")
 	public ResponseEntity<OutputJson[]> testCoreWebArcGisCommunication(){
 		ResponseEntity<OutputJson[]> responseEntity=service.testCoreWebArcGisCommunication();
 		return responseEntity;	
