@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.oasis.poc1.entity.OutputJson;
 import com.oasis.poc1.service.CoreWebArcGisService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "POC 1", description = "ArcGIS - Core Web App Communucation")
 @RestController
 public class CoreWebArcGisController {
 	

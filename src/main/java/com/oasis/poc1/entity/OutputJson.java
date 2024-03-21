@@ -3,14 +3,13 @@ package com.oasis.poc1.entity;
 import java.util.Date;
 
 public class OutputJson {
-		
+
 	private String entityName;
-	private String label;
-	private String controlType;
-	private String attribute;
-	private String value;	
-	private Date timestamp;
-	
+	private String label;	
+	private String controlType;	
+	private String attribute;	
+	private String value;		
+	private Date timestamp;	
 	
 	public String getEntityName() {
 		return entityName;
