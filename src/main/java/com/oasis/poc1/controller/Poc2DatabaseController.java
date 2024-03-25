@@ -2,10 +2,13 @@ package com.oasis.poc1.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oasis.poc1.entity.Oasis_Poc2;
@@ -26,6 +29,8 @@ public class Poc2DatabaseController {
 	@Autowired
 	Poc2DatabaseService service;
 	
+	Logger logger = LoggerFactory.getLogger(Poc2DatabaseController.class);
+	
 	/**************
 	 * Method: getAllEntitiesFromTable 
 	 * Purpose: This method will return all the entities store in Oasis_Poc2 Table
@@ -34,12 +39,15 @@ public class Poc2DatabaseController {
 	 */
 	@GetMapping("/getAllPoc2Entities")
 	public List<Oasis_Poc2> getAllEntitiesFromTable(){
+		logger.info("Poc2DatabaseController - getAllEntitiesFromTable() begins");
 		List<Oasis_Poc2> entityList = service.getAllEntitiesFromTable();
+		logger.info("Poc2DatabaseController - getAllEntitiesFromTable() ends");
 		return entityList;
 	}
 	
 	@PostMapping()
-	public void updatePoc2Entities(){
-		
+	public void updatePoc2Entities(@RequestBody List<Oasis_Poc2> poc2EntityList){
+		logger.info("Poc2DatabaseController - updatePoc2Entities() begins");
+		logger.info("Poc2DatabaseController - updatePoc2Entities() ends");
 	}
 }
