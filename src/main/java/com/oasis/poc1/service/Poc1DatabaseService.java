@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.oasis.poc1.entity.Oasis_Poc1;
+import com.oasis.poc1.entity.OasisPoc1;
 import com.oasis.poc1.repository.OasisPoc1Repo;
 
 /**************
@@ -63,9 +63,9 @@ public class Poc1DatabaseService {
 	 * Input parameters: None
 	 * @return List <Oasis_Poc1>
 	 */	
-	public List<Oasis_Poc1> getAllEntitiesfromDb(){
+	public List<OasisPoc1> getAllEntitiesfromDb(){
 		logger.info("Poc1DatabaseService - getAllEntitiesfromDb() begins");
-		List<Oasis_Poc1> entityList = new ArrayList<Oasis_Poc1>();
+		List<OasisPoc1> entityList = new ArrayList<OasisPoc1>();
 		entityList=repository.findAll();
 		logger.info("Poc1DatabaseService - getAllEntitiesfromDb() ends");
 		return entityList;

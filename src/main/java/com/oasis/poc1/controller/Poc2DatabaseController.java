@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.oasis.poc1.entity.Oasis_Poc2;
+import com.oasis.poc1.entity.OasisPoc2;
 import com.oasis.poc1.service.Poc2DatabaseService;
 
 /**************
@@ -38,16 +39,17 @@ public class Poc2DatabaseController {
 	 * @return List<Oasis_Poc2>
 	 */
 	@GetMapping("/getAllPoc2Entities")
-	public List<Oasis_Poc2> getAllEntitiesFromTable(){
+	public List<OasisPoc2> getAllEntitiesFromTable(){
 		logger.info("Poc2DatabaseController - getAllEntitiesFromTable() begins");
-		List<Oasis_Poc2> entityList = service.getAllEntitiesFromTable();
+		List<OasisPoc2> entityList = service.getAllEntitiesFromTable();
 		logger.info("Poc2DatabaseController - getAllEntitiesFromTable() ends");
 		return entityList;
 	}
 	
-	@PostMapping()
-	public void updatePoc2Entities(@RequestBody List<Oasis_Poc2> poc2EntityList){
+	@PutMapping("/updateDynamicEntity")
+	public void updateDynamicTemplateEntities(@RequestBody List<OasisPoc2> poc2EntityList){
 		logger.info("Poc2DatabaseController - updatePoc2Entities() begins");
+		service.updateDynamicTemplateEntities(poc2EntityList);
 		logger.info("Poc2DatabaseController - updatePoc2Entities() ends");
 	}
 }

@@ -3,7 +3,7 @@ package com.oasis.poc1.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.oasis.poc1.entity.Oasis_Poc2;
+import com.oasis.poc1.entity.OasisPoc2;
 
 /**************
  * Interface: OasisPoc2Repo 
@@ -13,6 +13,6 @@ import com.oasis.poc1.entity.Oasis_Poc2;
  * 
  */
 @Repository
-public interface OasisPoc2Repo extends JpaRepository<Oasis_Poc2, Integer>{
+public interface OasisPoc2Repo extends JpaRepository<OasisPoc2, Integer>{
 
 }
