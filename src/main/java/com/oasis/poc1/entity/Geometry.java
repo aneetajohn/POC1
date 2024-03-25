@@ -1,16 +1,15 @@
 package com.oasis.poc1.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class Geometry {
-//	@JsonInclude(JsonInclude.Include.NON_ABSENT)
+
 	private List<List<Double []>> rings;
-	//@JsonInclude(JsonInclude.Include.NON_EMPTY)
+
 	private Double x;
-	//@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	
 	private Double y;
 	
 	public Double getX() {
@@ -40,12 +39,4 @@ public class Geometry {
 		return "Geometry [rings=" + rings + ", x=" + x + ", y=" + y + "]";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-
 }

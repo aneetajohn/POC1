@@ -25,6 +25,12 @@ import com.oasis.poc1.entity.TileSubsetQuery;
 import com.oasis.poc1.entity.Token;
 import com.oasis.poc1.entity.WellSubsetQuery;
 
+/**************
+ * Class: Poc1Service 
+ * 
+ * Purpose: Acts as a service layer to establish communication between ArcGIS Enterprise & Core Web.
+ *     Poc1 - BiDirectional Communication - ArcGIS Enterprise to Core Web App
+ */
 @Service
 @PropertySource(value="application.yml")
 public class Poc1Service {
@@ -44,31 +50,15 @@ public class Poc1Service {
 	
 	String tokenString="";
 	
-	
-	//Testing REST API using Rest Template 
-	public ResponseEntity<?> testExternalGetRestAPIUsingRestTemmplate(String url){
-		
-		logger.info("..Testing ArcGIS Enterprise Rest API: " +url+ " begins..");
-		ResponseEntity<?> responseEntity =null;
-		Object response=restTemplate.getForObject(url, Object.class);		
-		if(Objects.nonNull(response)) {
-			logger.info("..Success Response from ArcGIS Enterprise Rest API ..");
-			logger.info("Response:" + response);
-			responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(response);
-		}else {
-			logger.info("..ArcGIS Enterprise Rest API Call Failed : Empty Response..");
-			responseEntity=ResponseEntity.noContent().build();
-		}
-		logger.info("..Testing ArcGIS Enterprise Rest API "+url+ " ends..");
-		return responseEntity;
-	}
-	
-	//Testing ArcGIS Generate Token  API using Rest Template 
-	public ResponseEntity<?> testGenerateTokenApi(){			
-		
-		String tokenUrl="https://lrcgo.maps.arcgis.com/sharing/generateToken";		                			
-		logger.info("..Testing ArcGIS Enterprise Generate Token API: " +tokenUrl+ " begins..");
-		
+	/**************
+	 * Method: getGenerateTokenApi 
+	 * Purpose: This method is used to receive a token as response from ArcGis Enterprise API
+	 * Input parameters: None
+	 * @return Token as response
+	 */
+	public ResponseEntity<?> getGenerateTokenApi(){				          			
+		logger.info("Poc1Service - getGenerateTokenApi() begins..");
+		String tokenUrl="https://lrcgo.maps.arcgis.com/sharing/generateToken";		      
 		ResponseEntity<?> responseEntity =null;			
 		
 		try {			
@@ -89,36 +79,39 @@ public class Poc1Service {
 				if(!response.getBody().contains("error")) {
 					Token token = objectMapper.readValue(response.getBody(), Token.class) ;										
 					tokenString = token.getToken();	
-					logger.info("..Token received successfully from ArcGIS Enterprise Generate Token API .."+token);
+					logger.info("*** Token received successfully from ArcGIS Enterprise Generate Token API: "+token);
 					responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(token);				
 				}else {
 					ErrorResponse errorResponse = objectMapper.readValue(response.getBody(), ErrorResponse.class) ;	
-					logger.info("Error Response received from ArcGIS Enterprise Generate Token API:" + errorResponse);
+					logger.info("*** Error Response received from ArcGIS Enterprise Generate Token API:" + errorResponse);
 					responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(errorResponse);
 				}			
-			}else {			
-				logger.info("Empty Response:" + response.getBody());
-				logger.error("..ArcGIS Enterprise Generate Token API Call Failed : Empty Response..");
+			}else {						
+				logger.error("*** ArcGIS Enterprise Generate Token API Call Failed : Empty Response ***");
 				responseEntity=ResponseEntity.noContent().build();
 			}
 		} catch (JsonMappingException e) {			
-			logger.error("Error in testTokenApi : " + e.getMessage());
+			logger.error("JsonMappingException in getGenerateTokenApi() : " + e.getMessage());
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
-			logger.error("Error in testTokenApi : " + e.getMessage());
+			logger.error("JsonProcessingException in getGenerateTokenApi() : " + e.getMessage());
 			e.printStackTrace();
 		}	
-		logger.info("..Testing ArcGIS Enterprise Generate Token API "+tokenUrl+ " ends..");
+		logger.info("Poc1Service - getGenerateTokenApi() ends");
 		return responseEntity;
 	}
 	
-	//Testing ArcGIS Petroleum Well API using Rest Template 
-	public ResponseEntity<?> testPetroleumWellSubsetQuery(){
+	/**************
+	 * Method: getPetroleumWellSubsetQuery 
+	 * Purpose: This method is used to test Petroleum Well Subset API Query of ArcGIS Enterprise
+	 * Input parameters: None
+	 * @return Petroleum Well Query response: WellSubsetQuery
+	 */
+	public ResponseEntity<?> getPetroleumWellSubsetQuery(){
 		
-		logger.info("..Testing ArcGIS Enterprise Petroleum Well API begins..");
+		logger.info("Poc1Service - getPetroleumWellSubsetQuery() begins");
 	
-		ResponseEntity<?> responseEntity =null;
-	
+		ResponseEntity<?> responseEntity =null;	
 		String petroleumWellUrl=petroleumWellSubset+"/query?token="+tokenString;
 		
 		HttpHeaders header = new HttpHeaders();
@@ -137,32 +130,36 @@ public class Poc1Service {
 				//Checking if response has error code
 				if(!response.getBody().contains("error")) {
 					WellSubsetQuery petroleumWell = objectMapper.readValue(response.getBody(), WellSubsetQuery.class);
-					logger.info("Success Response received from ArcGIS Petroleum Well API .." + petroleumWell);
+					logger.info("*** Success Response received from ArcGIS Petroleum Well API: " + petroleumWell);
 					responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(petroleumWell);
 				}else {
 					ErrorResponse errorResponse = objectMapper.readValue(response.getBody(), ErrorResponse.class) ;	
-					logger.info("Error Response received from ArcGIS Petroleum Well API:" + errorResponse);
+					logger.error("*** Error Response received from ArcGIS Petroleum Well API:" + errorResponse);
 					responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(errorResponse);
 				}				
 			}else {
-				logger.error("..ArcGIS Enterprise Petroleum Well API Call Failed : Empty Response..");
-				logger.info("Empty Response:" + response.getBody());
+				logger.error("*** ArcGIS Enterprise Petroleum Well API Call Failed : Empty Response..");				
 				responseEntity=ResponseEntity.noContent().build();
 			}
 		}catch(Exception e) {
-			logger.error("Error in testing Petroleum Well Subset Query : " + e.getMessage());
+			logger.error("Exception in getPetroleumWellSubsetQuery() : " + e.getMessage());
 			e.printStackTrace();
 		}
-		logger.info("..Testing ArcGIS Enterprise Petroleum Well API ends..");			
+		logger.info("Poc1Service - getPetroleumWellSubsetQuery() ends");			
 		return responseEntity;			
 	}
 	
-	//Testing ArcGIS Tile Drainage Area Subset Query using Rest Template 
-	public ResponseEntity<?> testTileDrainageAreaSubsetQuery(){
-			
-		logger.info("..Testing ArcGIS Enterprise Tile Drainage Area Subset API begins..");			
+	/**************
+	 * Method: getTileDrainageAreaSubsetQuery 
+	 * Purpose: This method is used to test Tile Drainage Area Subset API Query of ArcGIS Enterprise
+	 * Input parameters: None
+	 * @return Tile Query response: TileSubsetQuery
+	 */
+	
+	public ResponseEntity<?> getTileDrainageAreaSubsetQuery(){			
+		logger.info("Poc1Service - getTileDrainageAreaSubsetQuery() begins");			
 		ResponseEntity<?> responseEntity =null;
-		logger.info("Token String: " +  tokenString);
+		
 		/*
 		if(tokenString.isEmpty()) {
 			logger.info("Token String is Empty. Generating Token");
@@ -188,23 +185,22 @@ public class Poc1Service {
 				//Checking if response has error code
 				if(!response.getBody().contains("error")) {
 					TileSubsetQuery tileDrainageArea = objectMapper.readValue(response.getBody(), TileSubsetQuery.class);
-					logger.info("Success Response received from ArcGIS Tile Drainage Area Subset API .." + tileDrainageArea);
+					logger.info("*** Success Response received from ArcGIS Tile Drainage Area Subset API .." + tileDrainageArea);
 					responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(tileDrainageArea);
 				}else {
 					ErrorResponse errorResponse = objectMapper.readValue(response.getBody(), ErrorResponse.class) ;	
-					logger.info("Error Response received from ArcGIS Tile Drainage Area Subset API:" + errorResponse);
+					logger.info("*** Error Response received from ArcGIS Tile Drainage Area Subset API:" + errorResponse);
 					responseEntity= ResponseEntity.status(200).contentType(MediaType.APPLICATION_JSON).body(errorResponse);
 				}				
 			}else {
-				logger.error("..ArcGIS Enterprise Tile Drainage Area Subset Call Failed : Empty Response..");
-				logger.info("Empty Response:" + response.getBody());
+				logger.error("*** ArcGIS Enterprise Tile Drainage Area Subset Call Failed : Empty Response..");				
 				responseEntity=ResponseEntity.noContent().build();
 			}
 		}catch(Exception e) {
-			logger.error("Error in Tile Drainage Area Subset Query : " + e.getMessage());
+			logger.error("Exception in Tile Drainage Area Subset Query : " + e.getMessage());
 			e.printStackTrace();
 		}
-		logger.info("..Testing ArcGIS Enterprise Tile Drainage Area Subset API ends..");			
+		logger.info("Poc1Service - getTileDrainageAreaSubsetQuery() ends");			
 		return responseEntity;			
 	}
 	

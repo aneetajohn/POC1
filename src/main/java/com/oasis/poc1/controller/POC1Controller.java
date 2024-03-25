@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
+/**************
+ * Class: Poc1Controller 
+ * 
+ * Purpose: Rest controller class to test External Rest API of ArcGIS Enterprise
+ * Poc1 - BiDirectional Communication - ArcGIS to Core Web
+ */
+@CrossOrigin(origins = "https://oasis-poc2-dynamicui.azurewebsites.net")
 @Tag(name = "OASIS - POC 1", description = "Core Web - ArcGIS Communucation")
 @RestController
 public class Poc1Controller {
@@ -26,6 +33,12 @@ public class Poc1Controller {
 	
 	Logger logger = LoggerFactory.getLogger(Poc1Controller.class);
 	
+	/**************
+	 * Method: welcomeMessage 
+	 * Purpose: This method will return a welcome message as response
+	 * Input parameters: None
+	 * @return Welcome Message
+	 */
 	@Operation(
 			summary = "Welcome Message",
 			description = "Welcome Message of OASIS - POC 1",
@@ -47,12 +60,6 @@ public class Poc1Controller {
 		return "Hello From Core Web Application, OASIS - POC-1.";		
 	}
 	
-	@Hidden
-	@GetMapping("/testGetApi")
-	public ResponseEntity<?> testExternalGetRestApi(@RequestBody String url){
-		ResponseEntity<?> responseEntity=service.testExternalGetRestAPIUsingRestTemmplate(url);
-		return responseEntity;		
-	}
 	/*
 	@Operation(
 			summary = "Get Token from ArcGIS Enterprise",
@@ -65,21 +72,39 @@ public class Poc1Controller {
 			})
 			*/
 			
+	/**************
+	 * Method: getTokenApi 
+	 * Purpose: This method is used to receive a token from ArcGis Enterprise
+	 * Input parameters: None
+	 * @return Token as response
+	 */
 	@GetMapping("/getTokenAPI")
-	public ResponseEntity<?> testTokenApi(){	
-		ResponseEntity<?> responseEntity = service.testGenerateTokenApi();			
+	public ResponseEntity<?> getTokenApi(){	
+		ResponseEntity<?> responseEntity = service.getGenerateTokenApi();			
 		return responseEntity;				
 	}
 
+	/**************
+	 * Method: getPetroleumWellApi 
+	 * Purpose: This method is used to test Petroleum Well Subset API Query of ArcGIS Enterprise
+	 * Input parameters: None
+	 * @return Petroleum Well Query response: WellSubsetQuery
+	 */
 	@GetMapping("/getWellQuery")
-	public ResponseEntity<?> testPetroleumWellApi(){	
-		ResponseEntity<?> responseEntity=service.testPetroleumWellSubsetQuery();		
+	public ResponseEntity<?> getPetroleumWellApi(){	
+		ResponseEntity<?> responseEntity=service.getPetroleumWellSubsetQuery();		
 		return responseEntity;				
 	}
 	
+	/**************
+	 * Method: getTileDrainageAreaApi 
+	 * Purpose: This method is used to test Tile Drainage Area Subset API Query of ArcGIS Enterprise
+	 * Input parameters: None
+	 * @return Tile Query response: TileSubsetQuery
+	 */
 	@GetMapping("/getTileQuery")
-	public ResponseEntity<?> testTileDrainageAreaApi(){	
-		ResponseEntity<?> responseEntity=service.testTileDrainageAreaSubsetQuery();		
+	public ResponseEntity<?> getTileDrainageAreaApi(){	
+		ResponseEntity<?> responseEntity=service.getTileDrainageAreaSubsetQuery();		
 		return responseEntity;				
 	}
 }
